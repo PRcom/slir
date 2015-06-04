@@ -1,5 +1,10 @@
 # SLIR (Smart Lencioni Image Resizer)
 
+### Deprecation notice
+
+**SLIR is now deprecated in favor of [ambroisemaupate/intervention-request](https://github.com/ambroisemaupate/intervention-request) library which is based on the strong [image-intervention](http://image.intervention.io/) PHP framework.
+You should consider migrating to this new library which keeps the same Url guidelines.**
+
 SLIR (Smart Lencioni Image Resizer) resizes images, intelligently sharpens, crops based on width:height ratios, color fills transparent GIFs and PNGs, and caches variations for optimal performance.
 
 For questions or support, please [use the issue tracker](https://github.com/lencioni/SLIR/issues).
@@ -19,7 +24,7 @@ For questions or support, please [use the issue tracker](https://github.com/lenc
 
 ## Setting up as a library in a symfony-like environment
 
-* Add *SLIR* to your project `composer.json` as a packagist repository. 
+* Add *SLIR* to your project `composer.json` as a packagist repository.
 
 ```json
 {
@@ -67,7 +72,7 @@ SLIRConfig::init();
 ```php
 #
 # routes.yml
-# 
+#
 SLIRProcess:
     path:     /assets/{queryString}/{filename}
     defaults: { _controller: \MyBundle\Controllers\AssetsController::slirAction }
@@ -80,7 +85,7 @@ SLIRProcess:
 // In AssetsController.php class
 /**
  * Handle images resize with SLIR vendor
- * 
+ *
  * @param  string $queryString
  * @param  string $filename
  * @return void
@@ -88,7 +93,7 @@ SLIRProcess:
 public function slirAction($queryString, $filename)
 {
   define('SLIR_CONFIG_CLASSNAME','\MyBundle\Utils\SLIRConfig');
-  
+
   $slir = new \SLIR\SLIR();
   $slir->processRequestFromURL();
 
