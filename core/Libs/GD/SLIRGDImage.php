@@ -286,7 +286,7 @@ class SLIRGDImage extends SLIRImage implements SLIRImageLibrary
 				}
 			} else {
 				// There is a path, so get the info from the file
-				$this->info = getimagesize($this->getFullPath(), $extraInfo);
+				$this->info = getimagesize($this->getFullPath());
 
 				if ($this->info === false) {
 					header('HTTP/1.1 400 Bad Request');
@@ -296,11 +296,6 @@ class SLIRGDImage extends SLIRImage implements SLIRImageLibrary
 				$this->info['width']  =& $this->info[0];
 				$this->info['height'] =& $this->info[1];
 				$this->info['mime'] = image_type_to_mime_type(exif_imagetype($this->getFullPath()));
-
-				// IPTC
-				if (is_array($extraInfo) && isset($extraInfo['APP13'])) {
-					$this->info['iptc'] = iptcparse($extraInfo['APP13']);
-				}
 			}
 		}
 
